@@ -22,14 +22,41 @@ let arr4 = arr3.filter((element) => (element.charCodeAt(0)+element.charCodeAt(el
     //? so we will filter with ternary operator and see if the length of the element is odd or not and after that see if the char !=e
 //! 7
     //? now we need to find if Puns have even number of lowercase letters, not counting punctuation or spaces
-    arr6 = arr5.filter((element)=> element.toLowerCase())
-        
+let evenLowerCase = arr5.filter(pun => {
+    let lowerCase = 0
+    let punLettersOnly = pun.replace(/[^a-zA-Z]+/g, '')
 
-//! 8
+    for(let i = 0; i < punLettersOnly.length; i++) {
+      if (punLettersOnly[i] === punLettersOnly[i].toLowerCase()) {
+        lowerCase++
+      }
+    }
+    if (lowerCase % 2 === 0) {
+      return pun
+    }
+  });
+  console.log(evenLowerCase)
 
-// console.log(arr4)
-// console.log(arr4.length)
 
-console.log(arr5)
-// console.log(arr5.length)
-console.log(arr6)
+
+//! 8 now we can use the same logic to see if there are more than two capitals in the element
+
+let twoCaps = evenLowerCase.filter(pun =>{
+    let capitalLetters =0;
+    let punLettersOnly = pun.split(' ').join('')
+
+    for (let i=0;i<punLettersOnly.length;i++){
+        if(punLettersOnly[i]===punLettersOnly[i].toUpperCase()){
+            capitalLetters++;
+        }
+    }
+    if (capitalLetters >=2){
+        return pun
+    }
+});
+console.log(twoCaps)
+
+//! remove any puns with capital S
+let noCapitalS = twoCaps.filter(pun => !pun.includes('S'))
+console.log(noCapitalS)
+// final count is 3
